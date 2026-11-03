@@ -1,0 +1,1481 @@
+{
+  "pack": "Poco Loco art v3 \u2014 approved premium finish and explicit upper surround widening",
+  "revision_date": "2026-10-26",
+  "asset_count": 24,
+  "coordinate_convention": "Pixel bounds [left,top,right,bottom]; right and bottom exclusive.",
+  "cell": [
+    72,
+    104,
+    952,
+    919
+  ],
+  "cell_width": 880,
+  "cell_height": 815,
+  "reference_priority": [
+    "26 October selected approved finish: softened teeth, blue hair with reduced black shadows, no pale outer rim; front-of-face lighting retained.",
+    "Previous full-resolution symbol geometry, details and placement, including green low-contrast clubs.",
+    "Latest no-overhang requirement: hard clip to logical cell; no body bleed outside cell.",
+    "26 October surround clarification: rails beside centre reel widen outward above side-reel tops.",
+    "Earlier technical canvas and PNG contract; obsolete appearance and overhang instructions are superseded."
+  ],
+  "symbols": [
+    "sym_mariachi.png",
+    "sym_bandana.png",
+    "sym_catrina.png",
+    "sym_wild.png",
+    "sym_coin.png",
+    "sym_ring.png",
+    "sym_maracas.png",
+    "sym_guitar.png"
+  ],
+  "assets": {
+    "sym_mariachi.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "logical_cell": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "logical_cell_size": [
+        880,
+        815
+      ],
+      "anchor": [
+        512,
+        511.5
+      ],
+      "anchor_definition": "logical cell centre in full canvas",
+      "cell_origin": [
+        72,
+        104
+      ],
+      "opaque_artwork_bounds": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "source_artwork_bounds_before_cell_clip": [
+        67,
+        99,
+        958,
+        932
+      ],
+      "intentional_overhang": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "cell_tile": {
+        "path": "cell_tiles/sym_mariachi.png",
+        "canvas": [
+          880,
+          815
+        ],
+        "trim_offset": [
+          72,
+          104
+        ],
+        "anchor": [
+          440,
+          407.5
+        ]
+      },
+      "source_review": "exec-befbbe75-735c-4266-a1fb-405ae692b0e6.png",
+      "processing": "Generated local finish registered uniformly to the previous high-resolution source; previous alpha silhouette and cell placement preserved. Front-face artwork outside authorised finish regions retained.",
+      "outside_cell_nonzero_alpha": 0,
+      "path": "assets/sym_mariachi.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "sha256": "51d79c532b565195d62d311a3a4d4658657e7ed88fd2270e637ed2893825fc45",
+      "source_previous_asset_sha256": "ac407ddb4b04f68fd36725f163f282c5c728cf22982b0e67809f14538954213b",
+      "generated_finish_source": "exec-fd045739-4a53-4ad4-aa97-2f7f3bfedba6.png",
+      "original_alpha_identical": true,
+      "generator_canvas_normalization": "Generator returned1254-square; registered colour was sampled onto the unchanged1024-square production source, rather than resizing the source asset or changing its geometry."
+    },
+    "sym_bandana.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "logical_cell": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "logical_cell_size": [
+        880,
+        815
+      ],
+      "anchor": [
+        512,
+        511.5
+      ],
+      "anchor_definition": "logical cell centre in full canvas",
+      "cell_origin": [
+        72,
+        104
+      ],
+      "opaque_artwork_bounds": [
+        72,
+        127,
+        952,
+        919
+      ],
+      "source_artwork_bounds_before_cell_clip": [
+        69,
+        127,
+        955,
+        937
+      ],
+      "intentional_overhang": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "cell_tile": {
+        "path": "cell_tiles/sym_bandana.png",
+        "canvas": [
+          880,
+          815
+        ],
+        "trim_offset": [
+          72,
+          104
+        ],
+        "anchor": [
+          440,
+          407.5
+        ]
+      },
+      "source_review": "exec-fab12211-5bbd-41fc-b317-9332538a67da.png",
+      "processing": "Generated local finish registered uniformly to the previous high-resolution source; previous alpha silhouette and cell placement preserved. Front-face artwork outside authorised finish regions retained.",
+      "outside_cell_nonzero_alpha": 0,
+      "path": "assets/sym_bandana.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        72,
+        127,
+        952,
+        919
+      ],
+      "sha256": "4358dcb34a0feda9b55c710e3c1c2c5d570ebade58ced7bd940ec09a315d0b92",
+      "source_previous_asset_sha256": "10727d47a92611bda669a700e0efdf6759c9efc398ff8c75bd3c1460ec65c518",
+      "generated_finish_source": "exec-7787e608-47e3-4850-8e10-8f2ea3266c0d.png",
+      "original_alpha_identical": true,
+      "generator_canvas_normalization": "Generator returned1254-square; registered colour was sampled onto the unchanged1024-square production source, rather than resizing the source asset or changing its geometry."
+    },
+    "sym_catrina.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "logical_cell": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "logical_cell_size": [
+        880,
+        815
+      ],
+      "anchor": [
+        512,
+        511.5
+      ],
+      "anchor_definition": "logical cell centre in full canvas",
+      "cell_origin": [
+        72,
+        104
+      ],
+      "opaque_artwork_bounds": [
+        72,
+        127,
+        952,
+        919
+      ],
+      "source_artwork_bounds_before_cell_clip": [
+        66,
+        127,
+        959,
+        959
+      ],
+      "intentional_overhang": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "cell_tile": {
+        "path": "cell_tiles/sym_catrina.png",
+        "canvas": [
+          880,
+          815
+        ],
+        "trim_offset": [
+          72,
+          104
+        ],
+        "anchor": [
+          440,
+          407.5
+        ]
+      },
+      "source_review": "exec-84213090-cf3c-4c2c-92b8-0d48e53bfc86.png",
+      "processing": "Generated local finish registered uniformly to the previous high-resolution source; previous alpha silhouette and cell placement preserved. Front-face artwork outside authorised finish regions retained.",
+      "outside_cell_nonzero_alpha": 0,
+      "path": "assets/sym_catrina.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        72,
+        127,
+        952,
+        919
+      ],
+      "sha256": "6e1b42fbe45a1e719a4e94ba619c063a622446c54b511dc48c59dc42aceea43b",
+      "source_previous_asset_sha256": "89e54f4e9f1ce27e86efe80463769774da1bb1dfcbaaf249ce44fb693b1a6dd8",
+      "generated_finish_source": "exec-d6c7f741-e11f-4758-9bb9-9beda790d5dd.png",
+      "original_alpha_identical": true,
+      "generator_canvas_normalization": "Generator returned1254-square; registered colour was sampled onto the unchanged1024-square production source, rather than resizing the source asset or changing its geometry."
+    },
+    "sym_wild.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "logical_cell": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "logical_cell_size": [
+        880,
+        815
+      ],
+      "anchor": [
+        512,
+        511.5
+      ],
+      "anchor_definition": "logical cell centre in full canvas",
+      "cell_origin": [
+        72,
+        104
+      ],
+      "opaque_artwork_bounds": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "source_artwork_bounds_before_cell_clip": [
+        32,
+        65,
+        992,
+        925
+      ],
+      "intentional_overhang": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "cell_tile": {
+        "path": "cell_tiles/sym_wild.png",
+        "canvas": [
+          880,
+          815
+        ],
+        "trim_offset": [
+          72,
+          104
+        ],
+        "anchor": [
+          440,
+          407.5
+        ]
+      },
+      "source_review": "exec-4575fc92-2e3e-4ebc-9838-90038d5dc540.png",
+      "source_sha256": "a1f8cb7061e837067feba3ab533f73f893eae1ec50155d20458a86f130411ea0",
+      "processing": "Approved source colour pixels preserved; review guides/background removed; uniform canvas reduction; hard cell clipping.",
+      "outside_cell_nonzero_alpha": 0,
+      "path": "assets/sym_wild.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "sha256": "caeae329e2cc672fd69d8b856b7773358ce20e910adbba85cfd805007033c7c7"
+    },
+    "sym_coin.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "logical_cell": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "logical_cell_size": [
+        880,
+        815
+      ],
+      "anchor": [
+        512,
+        511.5
+      ],
+      "anchor_definition": "logical cell centre in full canvas",
+      "cell_origin": [
+        72,
+        104
+      ],
+      "opaque_artwork_bounds": [
+        86,
+        104,
+        940,
+        919
+      ],
+      "source_artwork_bounds_before_cell_clip": [
+        86,
+        69,
+        940,
+        925
+      ],
+      "intentional_overhang": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "cell_tile": {
+        "path": "cell_tiles/sym_coin.png",
+        "canvas": [
+          880,
+          815
+        ],
+        "trim_offset": [
+          72,
+          104
+        ],
+        "anchor": [
+          440,
+          407.5
+        ]
+      },
+      "source_review": "exec-19e8b865-41e8-4683-8151-976f1f6a646b.png",
+      "source_sha256": "c4026a2338978c532d2a4a80d3207a7d143800bfa385144bcaf88157e1de305e",
+      "processing": "Approved source colour pixels preserved; review guides/background removed; uniform canvas reduction; hard cell clipping.",
+      "outside_cell_nonzero_alpha": 0,
+      "value_panel_empty": true,
+      "value_text_safe_bounds": [
+        220,
+        490,
+        808,
+        620
+      ],
+      "coin_note": "Latest approved bright skull coin, not old creature coin. No anisotropic scaling. Top of circular artwork is clipped by the logical cell per latest no-overhang instruction.",
+      "path": "assets/sym_coin.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        86,
+        104,
+        940,
+        919
+      ],
+      "sha256": "680e0eccf00d8ef2809967404d80c3b25d860fcc705fa5d02b32a2b05fa485eb"
+    },
+    "sym_ring.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "logical_cell": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "logical_cell_size": [
+        880,
+        815
+      ],
+      "anchor": [
+        512,
+        511.5
+      ],
+      "anchor_definition": "logical cell centre in full canvas",
+      "cell_origin": [
+        72,
+        104
+      ],
+      "opaque_artwork_bounds": [
+        168,
+        181,
+        857,
+        842
+      ],
+      "source_artwork_bounds_before_cell_clip": [
+        168,
+        181,
+        857,
+        842
+      ],
+      "intentional_overhang": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "cell_tile": {
+        "path": "cell_tiles/sym_ring.png",
+        "canvas": [
+          880,
+          815
+        ],
+        "trim_offset": [
+          72,
+          104
+        ],
+        "anchor": [
+          440,
+          407.5
+        ]
+      },
+      "source_review": "exec-ef63a843-a06e-4a8c-9937-fd6937ae7510.png",
+      "source_sha256": "107a412e792b90014e0104042aa35f45b526ccb9c3bb59752f5598b5f60b10f9",
+      "processing": "Approved source colour pixels preserved; review guides/background removed; uniform canvas reduction; hard cell clipping.",
+      "outside_cell_nonzero_alpha": 0,
+      "path": "assets/sym_ring.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        168,
+        181,
+        857,
+        842
+      ],
+      "sha256": "66a13181ddb8ea328550c3d618ffeb2b681f58532275f82ed65a62c93a58ac6e"
+    },
+    "sym_maracas.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "logical_cell": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "logical_cell_size": [
+        880,
+        815
+      ],
+      "anchor": [
+        512,
+        511.5
+      ],
+      "anchor_definition": "logical cell centre in full canvas",
+      "cell_origin": [
+        72,
+        104
+      ],
+      "opaque_artwork_bounds": [
+        113,
+        225,
+        911,
+        796
+      ],
+      "source_artwork_bounds_before_cell_clip": [
+        113,
+        225,
+        911,
+        796
+      ],
+      "intentional_overhang": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "cell_tile": {
+        "path": "cell_tiles/sym_maracas.png",
+        "canvas": [
+          880,
+          815
+        ],
+        "trim_offset": [
+          72,
+          104
+        ],
+        "anchor": [
+          440,
+          407.5
+        ]
+      },
+      "source_review": "exec-7029fb4f-a04c-45d4-b943-f81dfdb2f030.png",
+      "source_sha256": "ed766bb0af629ae1758f3cea07c4929c1023fb74393563c85a313fe224d8ade7",
+      "processing": "Approved source colour pixels preserved; review guides/background removed; uniform canvas reduction; hard cell clipping.",
+      "outside_cell_nonzero_alpha": 0,
+      "path": "assets/sym_maracas.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        113,
+        225,
+        911,
+        796
+      ],
+      "sha256": "87b8a7bd5954d9b44984274f013e071196fea323b9aa51221287572e997db242"
+    },
+    "sym_guitar.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "logical_cell": [
+        72,
+        104,
+        952,
+        919
+      ],
+      "logical_cell_size": [
+        880,
+        815
+      ],
+      "anchor": [
+        512,
+        511.5
+      ],
+      "anchor_definition": "logical cell centre in full canvas",
+      "cell_origin": [
+        72,
+        104
+      ],
+      "opaque_artwork_bounds": [
+        130,
+        140,
+        896,
+        884
+      ],
+      "source_artwork_bounds_before_cell_clip": [
+        130,
+        140,
+        896,
+        884
+      ],
+      "intentional_overhang": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "cell_tile": {
+        "path": "cell_tiles/sym_guitar.png",
+        "canvas": [
+          880,
+          815
+        ],
+        "trim_offset": [
+          72,
+          104
+        ],
+        "anchor": [
+          440,
+          407.5
+        ]
+      },
+      "source_review": "exec-273458cd-4f0c-432c-b396-48c847b605a7.png",
+      "source_sha256": "48457f65f9eb9ec8ffe60ca659fabed19cd0f302a5063fe91dacffb138d8bda6",
+      "processing": "Approved source colour pixels preserved; review guides/background removed; uniform canvas reduction; hard cell clipping.",
+      "outside_cell_nonzero_alpha": 0,
+      "path": "assets/sym_guitar.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        130,
+        140,
+        896,
+        884
+      ],
+      "sha256": "76f5450c9888de193f304ae24181415fc9c0e102e757869190881750866d2750"
+    },
+    "bg_scene.png": {
+      "canvas": [
+        1024,
+        1536
+      ],
+      "opaque_artwork_bounds": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "anchor": [
+        512.0,
+        768.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "opaque": true,
+      "safe_crop": "Keep central street; crop sky and paving for other phone aspect ratios.",
+      "source": "exec-a154d2a2-1523-4c84-a9c3-02193a12007f.png",
+      "path": "assets/bg_scene.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "sha256": "8d46baaec424522efcaf4539919ff322990ce7cac14a9cf1751724d0f31b7929"
+    },
+    "cell_floor.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "anchor": [
+        512.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "opaque": true,
+      "tile_axes": [
+        "x",
+        "y"
+      ],
+      "repeat_size": [
+        1024,
+        1024
+      ],
+      "path": "assets/cell_floor.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "sha256": "7062ee143cb56ca381b638b7c5295c77802ed190b6d4b2445868d83ca7a8f524"
+    },
+    "frame_bar_h.png": {
+      "canvas": [
+        1536,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        0,
+        456,
+        1536,
+        568
+      ],
+      "anchor": [
+        768.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "tile_axes": [
+        "x"
+      ],
+      "repeat_size": [
+        1536,
+        112
+      ],
+      "physical_content_size": [
+        1536,
+        112
+      ],
+      "connection": "repeat at unit art scale; clip excess length, never fit the full repeat to a segment",
+      "thickness": 112,
+      "previous_thickness": 70,
+      "revision": "Broader outer sandstone appearance requested by newer handover.",
+      "path": "assets/frame_bar_h.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        0,
+        456,
+        1536,
+        568
+      ],
+      "sha256": "ca876a6efb28051c8440f461689327816132176484d0be2b6f25f152a0ea44f9"
+    },
+    "frame_bar_v.png": {
+      "canvas": [
+        1024,
+        1536
+      ],
+      "opaque_artwork_bounds": [
+        464,
+        0,
+        560,
+        1536
+      ],
+      "anchor": [
+        512.0,
+        768.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "tile_axes": [
+        "y"
+      ],
+      "repeat_size": [
+        96,
+        1536
+      ],
+      "physical_content_size": [
+        96,
+        1536
+      ],
+      "connection": "repeat at unit art scale; clip excess length, never fit the full repeat to a segment",
+      "thickness": 96,
+      "previous_thickness": 60,
+      "revision": "Broader outer sandstone appearance requested by newer handover.",
+      "path": "assets/frame_bar_v.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        464,
+        0,
+        560,
+        1536
+      ],
+      "sha256": "b1028b6eb7128cc96810026abcdb40480fc2a6b765cc3f84c6e093a96ee0474b"
+    },
+    "pillar_gold.png": {
+      "canvas": [
+        1024,
+        1536
+      ],
+      "opaque_artwork_bounds": [
+        488,
+        0,
+        536,
+        1536
+      ],
+      "anchor": [
+        512.0,
+        768.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "tile_axes": [
+        "y"
+      ],
+      "repeat_size": [
+        48,
+        1536
+      ],
+      "physical_content_size": [
+        48,
+        1536
+      ],
+      "connection": "repeat at unit art scale; clip excess length, never fit the full repeat to a segment",
+      "width": 48,
+      "path": "assets/pillar_gold.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        488,
+        0,
+        536,
+        1536
+      ],
+      "sha256": "200fd9fea6fb6568befe0bdfb210bdd27ab2553f446e59aab318daf3d875e140"
+    },
+    "pillar_outer.png": {
+      "canvas": [
+        1024,
+        1536
+      ],
+      "opaque_artwork_bounds": [
+        387,
+        0,
+        637,
+        1536
+      ],
+      "anchor": [
+        512.0,
+        768.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "tile_axes": [
+        "y"
+      ],
+      "repeat_size": [
+        250,
+        1536
+      ],
+      "physical_content_size": [
+        250,
+        1536
+      ],
+      "connection": "repeat at unit art scale; clip excess length, never fit the full repeat to a segment",
+      "diamond_count": 5,
+      "diamond_period_px": 307.2,
+      "orientation": "left side; mirror horizontally for right side",
+      "width": 250,
+      "path": "assets/pillar_outer.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        387,
+        0,
+        637,
+        1536
+      ],
+      "sha256": "5f19126e8ead92fd2e851a2427f049d1956ab4fbbcc2e98cfd2d6f4b48c81151"
+    },
+    "divider_gold.png": {
+      "canvas": [
+        1536,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        0,
+        504,
+        1536,
+        520
+      ],
+      "anchor": [
+        768.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "tile_axes": [
+        "x"
+      ],
+      "repeat_size": [
+        1536,
+        16
+      ],
+      "physical_content_size": [
+        1536,
+        16
+      ],
+      "connection": "repeat at unit art scale; clip excess length, never fit the full repeat to a segment",
+      "thickness": 16,
+      "optional": true,
+      "path": "assets/divider_gold.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        0,
+        504,
+        1536,
+        520
+      ],
+      "sha256": "7ad58189379aef7b09029c594b31937755bde848af75eff344010a43d115b115"
+    },
+    "pillar_gold_cap.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        476,
+        480,
+        548,
+        544
+      ],
+      "anchor": [
+        512.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "stem_width": 48,
+      "flare_width": 72,
+      "connection_anchor": [
+        512,
+        544
+      ],
+      "connection": "bottom",
+      "physical_content_size": [
+        72,
+        64
+      ],
+      "path": "assets/pillar_gold_cap.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        476,
+        480,
+        548,
+        544
+      ],
+      "sha256": "54509343d8222e41eed335888edaa26a87f14e9fecfc2dc9da1433a3206041d2"
+    },
+    "pillar_gold_base.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        476,
+        480,
+        548,
+        544
+      ],
+      "anchor": [
+        512.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "stem_width": 48,
+      "flare_width": 72,
+      "connection_anchor": [
+        512,
+        480
+      ],
+      "connection": "top",
+      "physical_content_size": [
+        72,
+        64
+      ],
+      "path": "assets/pillar_gold_base.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        476,
+        480,
+        548,
+        544
+      ],
+      "sha256": "c47b8a75dde1d14ecd994dd0f2e79acdfda0d10fdf917d9277cc8ad4bd45323d"
+    },
+    "pillar_outer_top.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        387,
+        465,
+        637,
+        558
+      ],
+      "anchor": [
+        512.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "width": 250,
+      "orientation": "left side; mirror horizontally for right side",
+      "physical_content_size": [
+        250,
+        93
+      ],
+      "connection": "bottom",
+      "path": "assets/pillar_outer_top.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        387,
+        465,
+        637,
+        558
+      ],
+      "sha256": "9313e6779f7a7f47168a6723151b725f01ab1d653cbdaa334fa0795f1140baed"
+    },
+    "pillar_outer_bottom.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        387,
+        454,
+        637,
+        570
+      ],
+      "anchor": [
+        512.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "width": 250,
+      "orientation": "left side; mirror horizontally for right side",
+      "physical_content_size": [
+        250,
+        116
+      ],
+      "connection": "top",
+      "path": "assets/pillar_outer_bottom.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        387,
+        454,
+        637,
+        570
+      ],
+      "sha256": "dbc7e236eaeca8f18a45f3123d6b98e76ba0438b4c3f3680d58dd122bed02e34"
+    },
+    "frame_corner.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        132,
+        131,
+        891,
+        893
+      ],
+      "anchor": [
+        512.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "authored_scale": 4,
+      "assembly_scale": 0.25,
+      "nominal_vertical_thickness": 96,
+      "nominal_horizontal_thickness": 112,
+      "orientation": "top-left; mirror x/y for other corners",
+      "join_overlap_px": 2,
+      "path": "assets/frame_corner.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        132,
+        131,
+        891,
+        893
+      ],
+      "sha256": "948bb662ef619e67964ae5fa59b95c3fda219ee2bea6065fbc8d1a1521c12753"
+    },
+    "top_cap.png": {
+      "canvas": [
+        1536,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        68,
+        462,
+        1468,
+        562
+      ],
+      "anchor": [
+        768.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "physical_content_size": [
+        1400,
+        100
+      ],
+      "aspect_ratio": 14,
+      "assembly": "Scale uniformly as decorative top strip; outer structural rail is frame_bar_h.",
+      "path": "assets/top_cap.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        68,
+        462,
+        1468,
+        562
+      ],
+      "sha256": "a1b5c9a74f687412bd030d650d0f51ff43a9db27745ff84ed56753e390787b56"
+    },
+    "win_bar.png": {
+      "canvas": [
+        1536,
+        1024
+      ],
+      "opaque_artwork_bounds": [
+        18,
+        371,
+        1518,
+        652
+      ],
+      "anchor": [
+        768.0,
+        512.0
+      ],
+      "trim_offset": [
+        0,
+        0
+      ],
+      "style_reference": "Darker of the two original matte mockups: Matte Poco Loco Aztec slot screen",
+      "physical_content_size": [
+        1500,
+        281
+      ],
+      "empty_panel": true,
+      "text_safe_bounds": [
+        245,
+        480,
+        1291,
+        535
+      ],
+      "approved_design": "Two inward-facing faceted stone skull bookends; wide empty message panel.",
+      "aspect_ratio": 5.338078291814947,
+      "ratio_note": "Later approved skull bookends supersede earlier generic 6.6:1 plain plate. Uniform scaling only.",
+      "path": "assets/win_bar.png",
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "content_bounds": [
+        18,
+        371,
+        1518,
+        652
+      ],
+      "sha256": "0bae92c69b4dd163540fe72b8fd4493db7ba94a4fba73665e71fda93dd567776"
+    },
+    "centre_rail_upper_left.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "path": "assets/centre_rail_upper_left.png",
+      "physical_content_size": [
+        144,
+        408
+      ],
+      "opaque_artwork_bounds": [
+        440,
+        308,
+        584,
+        716
+      ],
+      "content_bounds": [
+        440,
+        308,
+        584,
+        716
+      ],
+      "anchor": [
+        584,
+        308
+      ],
+      "anchor_definition": "top of fixed centre-window edge",
+      "trim_offset": [
+        0,
+        0
+      ],
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "upper_width": 144,
+      "shaft_width": 96,
+      "taper_height": 128,
+      "nominal_half_cell_height": 407.5,
+      "assembly_overlap_at_bottom": 0.5,
+      "orientation": "left",
+      "tile_axes": [],
+      "assembly": "One piece only above each side reel; never repeat this transition down the shaft. Its inner edge stays aligned with the centre cell.",
+      "design_basis": "Reconstructed explicitly from the user\u2019s26October clarification of the upper widening; previous pack did not provide this junction profile.",
+      "material_source": "Existing approved frame_bar_v.png sandstone material; bevel widths preserved during modular widening.",
+      "sha256": "64019a43cc5c40fd3a16b2b69840e5ff8f0a79c34230b9bf59525cc322b8e523"
+    },
+    "centre_rail_upper_right.png": {
+      "canvas": [
+        1024,
+        1024
+      ],
+      "path": "assets/centre_rail_upper_right.png",
+      "physical_content_size": [
+        144,
+        408
+      ],
+      "opaque_artwork_bounds": [
+        440,
+        308,
+        584,
+        716
+      ],
+      "content_bounds": [
+        440,
+        308,
+        584,
+        716
+      ],
+      "anchor": [
+        440,
+        308
+      ],
+      "anchor_definition": "top of fixed centre-window edge",
+      "trim_offset": [
+        0,
+        0
+      ],
+      "mode": "RGBA",
+      "bits_per_channel": 8,
+      "colour_space": "sRGB",
+      "alpha": "straight, unassociated",
+      "upper_width": 144,
+      "shaft_width": 96,
+      "taper_height": 128,
+      "nominal_half_cell_height": 407.5,
+      "assembly_overlap_at_bottom": 0.5,
+      "orientation": "right",
+      "tile_axes": [],
+      "assembly": "One piece only above each side reel; never repeat this transition down the shaft. Its inner edge stays aligned with the centre cell.",
+      "design_basis": "Reconstructed explicitly from the user\u2019s26October clarification of the upper widening; previous pack did not provide this junction profile.",
+      "material_source": "Existing approved frame_bar_v.png sandstone material; bevel widths preserved during modular widening.",
+      "sha256": "99fa88219c885b74c9d08e9ef9a689484b4036f2ee5d59d1bacdad3fbab39530"
+    }
+  },
+  "assembly": {
+    "scale_rule": "One uniform s = displayedCellWidth / 880 for both axes.",
+    "full_canvas_placement": "Draw full 1024 texture at (cellLeft-72*s, cellTop-104*s) with size (1024*s,1024*s).",
+    "trimmed_alternative": "cell_tiles/ contains exact crops [72,104,952,919]; draw at cell origin, size (880*s,815*s). Choose one representation, not both.",
+    "clip_rule": "A logical 880x815 clip remains authoritative. Do not add overhang, body bleed, zoom, fit-to-bounds or square-cell resizing.",
+    "layout": {
+      "left": {
+        "rows": 3,
+        "top_in_cell_heights": 0.5
+      },
+      "centre": {
+        "rows": 4,
+        "top_in_cell_heights": 0
+      },
+      "right": {
+        "rows": 3,
+        "top_in_cell_heights": 0.5
+      }
+    },
+    "divider_optional": true,
+    "repeat_rule": "Repeat at native art scale multiplied by s, then clip length; do not squeeze the whole diamond repeat into each pillar segment.",
+    "layers_back_to_front": [
+      "bg_scene",
+      "cell_floor",
+      "cell-clipped symbols",
+      "optional dividers and surround",
+      "runtime coin values and win-bar text",
+      "unchanged existing game UI"
+    ]
+  },
+  "verification_previews": {
+    "canvas": [
+      950,
+      1655
+    ],
+    "assembly_canvas": [
+      3524,
+      3484
+    ],
+    "uniform_scale": 0.22,
+    "assembly_origin": [
+      87,
+      329
+    ],
+    "logical_cell_size": [
+      880,
+      815
+    ],
+    "columns": [
+      {
+        "x": 346,
+        "y": 519.5,
+        "count": 3
+      },
+      {
+        "x": 1322,
+        "y": 112.0,
+        "count": 4
+      },
+      {
+        "x": 2298,
+        "y": 519.5,
+        "count": 3
+      }
+    ],
+    "ui_preserved_regions": [
+      [
+        0,
+        0,
+        950,
+        316
+      ],
+      [
+        0,
+        1255,
+        950,
+        1655
+      ]
+    ],
+    "notes": "Verification composition only, not a new game layout mandate. Original logo and controls preserved as source pixels."
+  },
+  "scope_notes": [
+    "Logo, jackpot plates, buttons, meters and controls stay in the existing game and are not replacement assets.",
+    "Background and modular surround were prepared from the chosen darker mockup with built-in image generation, then normalized to the export contract.",
+    "Symbols use the approved review colour pixels, not the later extraction rerenders. Only guides/background removal, uniform canvas scaling and explicit cell clipping were applied.",
+    "The coin and Wild top tips are visibly clipped at the cell top under the latest no-overhang instruction; their underlying proportions were not stretched.",
+    "No production asset contains review guides, sample money values or win-bar lettering. WILD is intrinsic approved symbol lettering."
+  ],
+  "assembly_overlay": {
+    "path": "assembled/reel_surround_wide.png",
+    "canvas": [
+      4096,
+      4096
+    ],
+    "layout": "assembled/layout.json",
+    "optional_dividers": "assembled/reel_dividers_optional.png",
+    "use": "Alternative to drawing individual surround components. Do not draw both."
+  },
+  "surround_revision": {
+    "previous_pack": "Had112px horizontal and96px vertical rails, but no explicit widening at the side-reel-top junction.",
+    "current": "Adds144px upper centre-side rails tapering outward into96px shafts at y=0.5H. This is a profile change, not a change to cell sizes.",
+    "old_source_spec": "70/60px rails are superseded. The top strip remains a decorative strip; it does not replace the structural rail.",
+    "integration_check": "At displayed cell width222px: outer horizontal28.25px, shaft24.22px, upper36.33px. At width110px:14px,12px,18px. All dimensions use one uniform source scale."
+  }
+}

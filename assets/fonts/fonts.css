@@ -1,0 +1,5 @@
+/* v0.53: fonts served with the game (no Google Fonts request): Lilita One and Nunito (SIL Open Font License, via Fontsource) */
+@font-face { font-family: 'Lilita One'; font-style: normal; font-weight: 400; font-display: swap; src: url(./lilita-one-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Nunito'; font-style: normal; font-weight: 600; font-display: swap; src: url(./nunito-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Nunito'; font-style: normal; font-weight: 800; font-display: swap; src: url(./nunito-latin-800-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Nunito'; font-style: normal; font-weight: 900; font-display: swap; src: url(./nunito-latin-900-normal.woff2) format('woff2'); }

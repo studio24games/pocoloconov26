@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#14061c" />
+  <title>Poco Loco — Studio24 Game 002</title>
+  <link rel="preload" href="./assets/fonts/lilita-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="./assets/fonts/fonts.css?v=62" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<div id="viewport">
+  <div id="backdrop" aria-hidden="true">
+    <div class="bg-img bg-base"></div><div class="bg-img bg-feature"></div><div id="bgShade"></div><div class="rays"></div><div class="warm"></div><div class="petals"></div><div class="cele"><i class="cele-glow"></i><i class="cele-rays"></i></div>
+    <div class="papel"></div>
+    <div class="candles"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+
+  <main id="stage" class="mode-base">
+    <!-- The machine: logo, jackpots, reel grid, buy/extra and win bar form one framed structure.
+         Portrait: drawn at 1:1 in the 720x1280 stage. Desktop: the whole block is scaled into the centre. -->
+    <div id="game">
+      <div class="frame-top" aria-hidden="true"><i class="ft-arch"></i><i class="ft-shelf l"></i><i class="ft-shelf r"></i></div>
+      <section class="jackpots">
+        <div class="jp-col left">
+          <div class="jp jp-GRAND" data-jp="GRAND"><span>GRAND</span><strong>—</strong></div>
+          <div class="jp jp-MINOR" data-jp="MINOR"><span>MINOR</span><strong>—</strong></div>
+        </div>
+        <div class="jp-col right">
+          <div class="jp jp-MAJOR" data-jp="MAJOR"><span>MAJOR</span><strong>—</strong></div>
+          <div class="jp jp-MINI" data-jp="MINI"><span>MINI</span><strong>—</strong></div>
+        </div>
+      </section>
+
+      <header class="logo" aria-label="Poco Loco">
+        <span class="logo-top">POCO</span><span class="logo-bottom">LOCO</span>
+      </header>
+
+      <!-- Reels: positioned by reels.js from the 3-4-3 geometry -->
+      <div id="board">
+      <section id="machine">
+        <svg id="frameSvg" viewBox="0 0 720 1280" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div id="reelFrame"></div>
+        <div id="reels"></div>
+        <div id="featureLayer" class="hidden"></div>
+        <svg id="lineLayer" viewBox="0 0 720 1280" preserveAspectRatio="none"></svg>
+        <div id="frameLayer"></div>
+      </section>
+      <canvas id="fx" width="720" height="1280"></canvas>
+      </div>
+
+      <!-- notches under the short side reels + the base plinth under the grid -->
+      <button id="buyBtn" class="notch-btn buy"><b>BUY FEATURE</b><small id="buyCost" hidden></small></button>
+      <button id="extraBtn" class="notch-btn extra" aria-pressed="false" aria-label="Double Chance"><b><span class="dc-lab"><span>DOUBLE</span><span>CHANCE</span></span> <span class="toggle"><i></i></span></b></button>
+      <div class="frame-base" aria-hidden="true"></div>
+      <div id="msgBar"><div id="msgText">SPIN TO PLAY</div></div>
+      <div id="featureHud" class="hidden">
+        <div class="fh-left notch-plate"><span>SPINS LEFT</span><strong id="fhLives" class="lives"><i class="on"></i><i class="on"></i><i class="on"></i></strong><b id="fhCoins" hidden>0/10</b></div>
+        <div class="fh-mid" id="fhState">3 SPINS — EVERY COIN RESETS</div>
+        <div class="fh-right notch-plate"><span>FEATURE WIN</span><strong id="fhWin">0.00</strong></div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <section class="controls nav26">
+      <div class="row row-feat"></div>
+      <div class="row row-main">
+        <button id="turboBtn" class="round small" aria-pressed="false" title="Quick spin" aria-label="Quick spin"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></button>
+        <button id="spinBtn" class="spin" title="Spin (Space)" aria-label="Spin"><svg viewBox="0 0 64 64"><path d="M50 20A22 22 0 1 0 54 38"/><path d="M47 9l4 12-12-1"/></svg><b class="spin-n" id="spinN"></b></button>
+        <button id="autoBtn" class="round small" title="Autoplay" aria-label="Autoplay"><svg class="auto-ico" viewBox="0 0 24 24"><path d="M19.5 9A8 8 0 0 0 5.2 7.2M4.5 15a8 8 0 0 0 14.3 1.8"/><path d="M19.8 3.8v5.4h-5.4M4.2 20.2v-5.4h5.4"/></svg><i class="stop-sq"></i><em id="autoCount"></em></button>
+      </div>
+      <div class="row row-strip">
+        <div class="meter bal"><span>BALANCE</span><strong id="balance">—</strong></div>
+        <div class="stake"><button id="betDown" class="pm" title="Decrease stake" aria-label="Decrease stake">−</button><div class="meter"><span>STAKE</span><strong id="bet">—</strong></div><button id="betUp" class="pm" title="Increase stake" aria-label="Increase stake">+</button></div>
+        <div class="strip-icons">
+          <button id="soundBtn" class="util" title="Sound on / off" aria-label="Sound on or off"><svg viewBox="0 0 24 24"><path class="f" d="M4 9h4l5-4v14l-5-4H4z"/><path class="w" d="M16 8.5a5 5 0 0 1 0 7M18.6 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M16 9l5 6M21 9l-5 6"/></svg></button>
+          <i class="sep"></i>
+          <button id="menuBtn" class="util" title="Menu" aria-label="Menu"><svg viewBox="0 0 24 24"><path class="w" d="M4 6.5h16M4 12h16M4 17.5h16"/></svg></button>
+        </div>
+      </div>
+      <div class="nav-hidden" hidden>
+        <div class="meter win"><span>WIN</span><strong id="win">0.00</strong></div>
+        <button id="infoBtn">Rules</button><button id="historyBtn">History</button><button id="settingsBtn">Settings</button>
+      </div>
+    </section>
+
+    <!-- Overlays -->
+    <div id="banner" class="banner hidden"><div class="b-kicker"></div><div class="b-title"></div><div class="b-sub"></div></div>
+    <div id="totalWin" class="hidden">
+      <div class="tw-rays"></div>
+      <div class="tw-title">TOTAL WIN</div>
+      <div class="tw-altar"></div>
+      <div class="tw-tier"></div>
+      <div class="tw-amount">0.00</div>
+      <canvas id="fx2" width="0" height="0"></canvas>
+      <div class="tw-actions"><button class="tw-back" type="button" tabindex="-1" disabled>BACK TO THE GAME</button><button class="tw-buy2" type="button" tabindex="-1" disabled>BUY FEATURE</button></div>
+    </div>
+    <div id="bigWin" class="bigwin hidden"><div class="bw-tier"></div><div class="bw-amount"></div></div>
+
+    <div id="modal" class="modal hidden"><div class="modal-card"><button class="modal-close" aria-label="Close">×</button><div class="modal-body"></div></div></div>
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- Launch screen -->
+    <div id="launch">
+      <div class="l-rays" aria-hidden="true"></div>
+      <div class="l-glow" aria-hidden="true"></div>
+      <img class="l-studio" src="./assets/studio24_logo.png" alt="Studio24" />
+      <div class="l-presents"><i></i>PRESENTS<i></i></div>
+      <div class="l-title"><span>POCO</span><span>LOCO</span></div>
+      <div class="l-tag"><span>HOLD &amp; WIN <i>•</i> COIN SAVE</span><span>4 JACKPOTS <i>•</i> UP TO 5,000×</span></div>
+      <div class="l-load"><i id="loadBar"></i></div>
+      <button id="playBtn" class="btn-primary l-play" disabled>LOADING…</button>
+      <div class="l-sound"><button id="lSound" class="l-sound-btn" type="button" role="switch" aria-checked="true" aria-label="Sound"><span class="ls-lab" aria-hidden="true">SOUND</span><span class="ls-pill" aria-hidden="true"><i></i><b class="ls-on">ON</b><b class="ls-off">OFF</b></span></button></div>
+      <div class="l-foot">STUDIO24 · GAME 002 · v0.75f</div>
+    </div>
+    <div class="demo-badge">DEMO · PLAY MONEY</div>
+  </main>
+</div>
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+{
+  "_readme": "Images: fill a path (relative to client/assets/) to replace a placeholder; null keeps the built-in art. Audio: 'sfx' lists sample files by id; client/js/audio.js CUES maps game moments to those ids. Music entries carry seamless loop points in seconds.",
+  "symbols": {
+    "W": "symbols/v12/W.png",
+    "H1": "symbols/v12/H1.png",
+    "H2": "symbols/v12/H2.png",
+    "M1": "symbols/v12/M1.png",
+    "L1": "symbols/v12/L1.png",
+    "L2": "symbols/v12/L2.png",
+    "L3": "symbols/v12/L3.png",
+    "C_CASH": "symbols/v11/C_CASH.webp",
+    "C_MINI": "coins/v3/MINI.webp",
+    "C_MINOR": "coins/v3/MINOR.webp",
+    "C_MAJOR": "coins/v3/MAJOR.webp",
+    "C_GRAND": "coins/v3/GRAND.webp"
+  },
+  "backgrounds": {
+    "base_portrait": "backgrounds/street_v1.webp",
+    "base_landscape": "backgrounds/street_v1.webp",
+    "feature_portrait": "backgrounds/street_v1.webp",
+    "feature_landscape": "backgrounds/street_v1.webp"
+  },
+  "ui": {
+    "logo": "ui/logo.webp",
+    "altar": "ui/altar.webp",
+    "skull": "ui/logo_skull.png",
+    "skullJ0": "ui/skull_v3/m0.webp",
+    "skullJ1": "ui/skull_v3/m1.webp",
+    "skullJ2": "ui/skull_v3/m2.webp",
+    "skullJ3": "ui/skull_v3/m3.webp",
+    "char_big": "ui/chars/big.webp?v=62",
+    "char_mega": "ui/chars/mega.webp",
+    "char_epic": "ui/chars/epic.webp?v=62",
+    "statue": "frame/statue2.webp",
+    "statueR": "frame/statue2_r.webp",
+    "frameSide": "frame2/side_matte.webp",
+    "frameMid": "frame2/middle.webp",
+    "frieze2": "frame2/frieze.webp",
+    "base2": "frame2/base.webp",
+    "midTop": "frame2/mid_cap_matte.webp",
+    "midBot": "frame2/mid_foot_matte.webp",
+    "rail": "frame2/rail.webp",
+    "stoneDark": "frame2/stone_dark.webp",
+    "stoneBase": "frame2/stone_base_brown.webp",
+    "stoneBand": "frame2/stone_band_brown.webp",
+    "surround": "frame10/surround.webp"
+  },
+  "music": {
+    "base": {
+      "file": "audio/music_base.mp3",
+      "loopStart": 0.5,
+      "loopEnd": 38.896281
+    },
+    "feature": {
+      "file": "audio/music_feature.mp3",
+      "loopStart": 0.5,
+      "loopEnd": 28.3222
+    }
+  },
+  "sfx": {
+    "SFX_BIG_WIN": "audio/SFX_BIG_WIN.mp3",
+    "SFX_BONUS_BRASS_HIT": "audio/SFX_BONUS_BRASS_HIT.mp3",
+    "SFX_BUTTON": "audio/SFX_BUTTON.mp3",
+    "SFX_COIN_COLLECT": "audio/SFX_COIN_COLLECT.mp3",
+    "SFX_COIN_LAND_BASE": "audio/SFX_COIN_LAND_BASE.mp3",
+    "SFX_COIN_RESCUE": "audio/SFX_COIN_RESCUE.mp3",
+    "SFX_DEAD_SPIN": "audio/SFX_DEAD_SPIN.mp3",
+    "SFX_HEARTBEAT": "audio/SFX_HEARTBEAT.mp3",
+    "SFX_JACKPOT_FANFARE": "audio/SFX_JACKPOT_FANFARE.mp3",
+    "SFX_LINE_WIN": "audio/SFX_LINE_WIN.mp3",
+    "SFX_MULTIPLIER_REVEAL": "audio/SFX_MULTIPLIER_REVEAL.mp3",
+    "SFX_REEL_STOP_01": "audio/SFX_REEL_STOP_01.mp3",
+    "SFX_SPIN": "audio/SFX_SPIN.mp3",
+    "SFX_TENSION_3_COINS": "audio/SFX_TENSION_3_COINS.mp3",
+    "SFX_WIN_STINGER": "audio/SFX_WIN_STINGER.mp3",
+    "VOX_AJUA": "audio/VOX_AJUA.mp3",
+    "VOX_AY_AY_AY": "audio/VOX_AY_AY_AY.mp3",
+    "VOX_OLE_TRUMPET": "audio/VOX_OLE_TRUMPET.mp3",
+    "SFX_WHOOSH_FIREBALL": "audio/SFX_WHOOSH_FIREBALL.mp3",
+    "SFX_WHOOSH_BANNER": "audio/SFX_WHOOSH_BANNER.mp3",
+    "SFX_WHOOSH_BIG": "audio/SFX_WHOOSH_BIG.mp3",
+    "SFX_WHOOSH_MORPH": "audio/SFX_WHOOSH_MORPH.mp3",
+    "SFX_RISER": "audio/SFX_RISER.mp3",
+    "SFX_BOOM": "audio/SFX_BOOM.mp3",
+    "SFX_IMPACT": "audio/SFX_IMPACT.mp3",
+    "SFX_DEEP_HIT": "audio/SFX_DEEP_HIT.mp3",
+    "SFX_CRYSTAL": "audio/SFX_CRYSTAL.mp3",
+    "SFX_FIZZLE": "audio/SFX_FIZZLE.mp3",
+    "SFX_CHOMP": "audio/SFX_CHOMP.mp3",
+    "SFX_STAMP": "audio/SFX_STAMP.mp3",
+    "SFX_POOF": "audio/SFX_POOF.mp3",
+    "SFX_SPIN_SOFT": "audio/SFX_SPIN_SOFT.mp3",
+    "SFX_REEL_THUD": "audio/SFX_REEL_THUD.mp3",
+    "VOX2_AJUA": "audio/VOX2_AJUA.mp3",
+    "VOX2_AY_AY_AY": "audio/VOX2_AY_AY_AY.mp3",
+    "VOX2_AY_AY_AY_SAD": "audio/VOX2_AY_AY_AY_SAD.mp3",
+    "VOX2_ARRIBA": "audio/VOX2_ARRIBA.mp3",
+    "VOX2_ANDALE": "audio/VOX2_ANDALE.mp3",
+    "VOX2_ORALE": "audio/VOX2_ORALE.mp3",
+    "VOX2_ESO": "audio/VOX2_ESO.mp3",
+    "VOX2_QUE_SUERTE": "audio/VOX2_QUE_SUERTE.mp3",
+    "VOX2_OLE": "audio/VOX2_OLE.mp3",
+    "VOX2_VAMOS": "audio/VOX2_VAMOS.mp3"
+  },
+  "symbolCanvas": 300,
+  "symbolPlace": {
+    "W": [
+      6.0632,
+      5.6669,
+      88.3193
+    ],
+    "H1": [
+      0.7107,
+      1.0892,
+      94.4926
+    ],
+    "H2": [
+      10.3414,
+      13.0654,
+      78.2226
+    ],
+    "M1": [
+      7.0677,
+      11.7458,
+      80.961
+    ],
+    "L1": [
+      16.3104,
+      20.117,
+      66.4876
+    ],
+    "L2": [
+      15.4216,
+      19.0959,
+      68.7189
+    ],
+    "L3": [
+      18.0005,
+      23.1658,
+      59.5411
+    ]
+  }
+}
