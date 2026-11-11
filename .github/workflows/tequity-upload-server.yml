@@ -1,0 +1,97 @@
+# Build the game server Docker image and push it to the Tequity / Xanadu registry.
+#
+# Button: Actions tab -> "Tequity: upload game server" -> Run workflow.
+# Follows "Game Integration & Deployment Guide", Type 2 (Mixed RGS), Phase 1 step 2:
+#   echo $TOKEN | docker login ghcr.io -u user --password-stdin
+#   docker push ghcr.io/slotify/games/<PROVIDER>:v1.0.0
+# After a push, tell the Xanadu team the new version so they deploy it (main.tf).
+#
+# One-time setup (repo Settings -> Secrets and variables -> Actions):
+#   Variable: TEQUITY_PROVIDER     provider name Xanadu allocated to Studio24 (lower case)
+#   Secret:   TEQUITY_GHCR_TOKEN   GitHub token issued by Xanadu for ghcr.io/slotify
+#
+# The image is built from server/Dockerfile. The server must listen on $PORT and
+# expose the endpoints in GAME_SERVER_INTEGRATION.pdf (see the guide's Annex I).
+name: "Tequity: upload game server"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag, e.g. v1.0.0 (must be new; increment for every upload)"
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tequity-server
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check settings
+        env:
+          PROVIDER: ${{ vars.TEQUITY_PROVIDER }}
+          HAS_TOKEN: ${{ secrets.TEQUITY_GHCR_TOKEN != '' }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          fail=0
+          [ -n "$PROVIDER" ] || { echo "::error::Repo variable TEQUITY_PROVIDER is not set"; fail=1; }
+          [ "$HAS_TOKEN" = "true" ] || { echo "::error::Repo secret TEQUITY_GHCR_TOKEN is not set"; fail=1; }
+          echo "$VERSION" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$' || { echo "::error::Version must look like v1.0.0"; fail=1; }
+          exit $fail
+
+      - uses: actions/checkout@v4
+
+      - name: Check for server/Dockerfile
+        run: |
+          if [ ! -f server/Dockerfile ]; then
+            echo "::error::server/Dockerfile not found. The game server has not been built yet, so there is nothing to upload."
+            exit 1
+          fi
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: user
+          password: ${{ secrets.TEQUITY_GHCR_TOKEN }}
+
+      - name: Refuse to overwrite an existing version
+        env:
+          IMAGE: ghcr.io/slotify/games/${{ vars.TEQUITY_PROVIDER }}:${{ inputs.version }}
+        run: |
+          if docker manifest inspect "$IMAGE" > /dev/null 2>&1; then
+            echo "::error::$IMAGE already exists. Use a higher version number."
+            exit 1
+          fi
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: server/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/slotify/games/${{ vars.TEQUITY_PROVIDER }}:${{ inputs.version }}
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+
+      - name: Summary
+        env:
+          PROVIDER: ${{ vars.TEQUITY_PROVIDER }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          {
+            echo "### Game server pushed: \`ghcr.io/slotify/games/$PROVIDER:$VERSION\`"
+            echo ""
+            echo "Next: tell the Xanadu team to deploy it. Their main.tf entry:"
+            echo '```'
+            echo "versions = { \"game-servers\" = { \"$PROVIDER\" = \"$VERSION\" } }"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

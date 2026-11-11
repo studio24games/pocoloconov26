@@ -1,0 +1,94 @@
+# Upload the game client (front end) to the Tequity / Xanadu CDN.
+#
+# Button: Actions tab -> "Tequity: upload game client" -> Run workflow.
+# Follows "Game Integration & Deployment Guide", Type 2 (Mixed RGS), Phase 2 step 4:
+#   gsutil -m rsync -r <GAME-ID> gs://<bucket>/<PROVIDER>/<GAME-ID>
+#   gsutil setmeta -h "Cache-Control: max-age=0, no-cache" .../index.html
+#
+# One-time setup (repo Settings -> Secrets and variables -> Actions):
+#   Variables: TEQUITY_PROVIDER  provider name Xanadu allocated to Studio24 (lower case)
+#              TEQUITY_GAME_ID   this game's alphanumeric id, as agreed with Xanadu
+#   Secret:    TEQUITY_GCP_SA_KEY  JSON key of the service account Xanadu granted
+#                                  "Storage Object Admin" on the CDN buckets
+name: "Tequity: upload game client"
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Where to upload"
+        type: choice
+        options: [staging, production]
+        default: staging
+      confirm:
+        description: "For production, type the game id to confirm"
+        type: string
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tequity-client-${{ inputs.environment }}
+  cancel-in-progress: false
+
+env:
+  STAGING_BUCKET: cdn-refined-cortex-471514-e0
+  PRODUCTION_BUCKET: cdn-xanadu-prod-473110
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check settings
+        env:
+          PROVIDER: ${{ vars.TEQUITY_PROVIDER }}
+          GAME_ID: ${{ vars.TEQUITY_GAME_ID }}
+          HAS_KEY: ${{ secrets.TEQUITY_GCP_SA_KEY != '' }}
+          TARGET: ${{ inputs.environment }}
+          CONFIRM: ${{ inputs.confirm }}
+        run: |
+          fail=0
+          [ -n "$PROVIDER" ] || { echo "::error::Repo variable TEQUITY_PROVIDER is not set"; fail=1; }
+          [ -n "$GAME_ID" ]  || { echo "::error::Repo variable TEQUITY_GAME_ID is not set"; fail=1; }
+          [ "$HAS_KEY" = "true" ] || { echo "::error::Repo secret TEQUITY_GCP_SA_KEY is not set"; fail=1; }
+          if [ "$TARGET" = "production" ] && [ "$CONFIRM" != "$GAME_ID" ]; then
+            echo "::error::Production upload: type the game id ($GAME_ID) in the confirm box"; fail=1
+          fi
+          exit $fail
+
+      - uses: actions/checkout@v4
+
+      # Copy only what the browser needs. Tools, QA, docs and hosting config stay behind.
+      - name: Assemble bundle
+        env:
+          GAME_ID: ${{ vars.TEQUITY_GAME_ID }}
+        run: |
+          mkdir -p "dist/$GAME_ID"
+          cp -r index.html style.css js math assets "dist/$GAME_ID/"
+          if ! grep -rqF '/slotify/connector/connector.js' "dist/$GAME_ID/index.html" "dist/$GAME_ID/js"; then
+            echo "::warning::The game does not load /slotify/connector/connector.js. It will upload but will not talk to the Tequity RGS."
+          fi
+          echo "Files: $(find "dist/$GAME_ID" -type f | wc -l), size: $(du -sh "dist/$GAME_ID" | cut -f1)"
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.TEQUITY_GCP_SA_KEY }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Upload
+        env:
+          PROVIDER: ${{ vars.TEQUITY_PROVIDER }}
+          GAME_ID: ${{ vars.TEQUITY_GAME_ID }}
+          TARGET: ${{ inputs.environment }}
+        run: |
+          if [ "$TARGET" = "production" ]; then BUCKET="$PRODUCTION_BUCKET"; else BUCKET="$STAGING_BUCKET"; fi
+          DEST="gs://$BUCKET/$PROVIDER/$GAME_ID"
+          gsutil -m rsync -r "dist/$GAME_ID" "$DEST"
+          gsutil setmeta -h "Cache-Control: max-age=0, no-cache" "$DEST/index.html"
+          {
+            echo "### Game client uploaded to $TARGET"
+            echo "- Destination: \`$DEST\`"
+            echo "- Commit: \`$GITHUB_SHA\`"
+          } >> "$GITHUB_STEP_SUMMARY"
