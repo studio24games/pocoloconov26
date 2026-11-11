@@ -3126,3 +3126,6 @@ html body.art-v2 .coin-label.v2c.pot-lab { font-size: calc(var(--v2k) * 122px) !
 #labDoor .ld-typed { position: absolute; left: 3px; top: calc(31% - 11px); font: 13px serif; color: #9a9a9a; letter-spacing: 1px; white-space: pre; pointer-events: none; transform: skewX(-4deg); text-shadow: 1px 0 0 #3a0000; }
 #fxLabBtn[hidden] { display: none !important; }
 #verBtn[hidden] { display: none !important; }
+
+/* Tequity Connector froze the game (its popup is open): no input reaches the game */
+body.rgs-frozen #stage { pointer-events: none; }

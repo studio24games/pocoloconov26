@@ -11,7 +11,7 @@ const cellRect = c => { const r = cellRectM(c); if (!ASSETS.ui?.surround) return
   return { x: X(r.x), y: Y(r.y), w: r.w * k, h: r.h * k, cx: X(r.cx), cy: Y(r.cy) }; };
 import { FX } from './fx.js';
 import { Audio } from './audio.js';
-import { RGS } from './api.js';
+import { RGS, IS_TEQUITY } from './api.js';
 import { OPTION_ORDER } from '../math/engine.js';   // v0.71: the option order lives in one place
 import * as Summary from './summary.js';   // v0.71 (checklist 19)
 import { CARDS } from './cards.js';   // v0.71 (checklist 18)
@@ -606,6 +606,7 @@ document.fonts?.ready.then(() => fit());
 
 // ---------- HUD ----------
 function updateHud() {
+  rgs.sync({ bet: bet(), mode: modeName(), sound: S.sound, turbo: S.turbo, auto: S.auto.running });   // Tequity: report changes to the Connector
   $('#balance').textContent = fmt(S.balance);
   $('#bet').textContent = fmt(Math.round(bet() * S.cfg.modes[modeName()].costPct / 100));
   // in a bonus the skull can grow a plaque: the plaques show the live values until the bonus ends
@@ -1125,7 +1126,7 @@ const devStats = {
 
 // ---------- round flow ----------
 async function playRound(mode) {
-  if (S.busy) return null;
+  if (S.busy || S.frozen) return null;   // S.frozen: the Tequity Connector froze the game (e.g. a popup)
   audio.unlock();
   const stakeMinor = Math.round(bet() * S.cfg.modes[mode].costPct / 100);
   if (S.balance < stakeMinor) { toast('Insufficient balance'); stopAuto(); return null; }
@@ -1135,7 +1136,7 @@ async function playRound(mode) {
   try {
     rec = await rgs.play(bet(), mode, S.pendingForce, S.profile);
   } catch (e) {
-    S.busy = false; updateHud(); toast(`Server: ${e.code || e.message}`); stopAuto(); return null;
+    S.busy = false; updateHud(); if (!e.shownByConnector) toast(`Server: ${e.code || e.message}`); stopAuto(); return null;
   }
   S.pendingForce = null; S.last = rec;
   S.balance = rec.balanceBefore - rec.stake; updateHud();
@@ -2898,7 +2899,7 @@ function mountSettings(body) {
   }
   body.querySelector('#setMute').onclick = e => { S.sound = !S.sound; audio.setEnabled(S.sound); e.currentTarget.setAttribute('aria-pressed', String(!S.sound)); savePrefs(); updateHud(); };
   body.querySelector('#setTurbo').onclick = e => { $('#turboBtn').click(); e.currentTarget.setAttribute('aria-pressed', String(S.turbo)); savePrefs(); };
-  body.querySelector('#setTitle')?.addEventListener('click', () => labDoor());   // client 3 Nov: the secret door to the test menus
+  if (!IS_TEQUITY) body.querySelector('#setTitle')?.addEventListener('click', () => labDoor());   // demo only   // client 3 Nov: the secret door to the test menus
 }
 function closeModal() { $('#modal').classList.add('hidden'); }
 $('#modal .modal-close').onclick = closeModal;
@@ -3125,7 +3126,7 @@ function bind() {
   click('#soundBtn', () => { S.sound = !S.sound; audio.setEnabled(S.sound); savePrefs(); syncLaunchSound(); updateHud(); });
   click('#settingsBtn', () => openModal(settingsHTML(), mountSettings));
   click('#infoBtn', () => openModal(infoHTML()));
-  click('#historyBtn', async () => openModal(await historyHTML()));
+  click('#historyBtn', async () => { if (IS_TEQUITY) rgs.openHistory(); else openModal(await historyHTML()); });   // Tequity: the operator's full history
   // s8: rules, history and settings live behind the menu icon in the bottom strip
   click('#menuBtn', () => openModal(`<h2>Menu</h2><div class="menu26">
     <button class="btn-ghost" data-feat="1">Game features</button><button class="btn-ghost" data-go="#infoBtn">Paytable &amp; rules</button><button class="btn-ghost" data-go="#historyBtn">Game history</button><button class="btn-ghost" data-go="#settingsBtn">Settings</button></div>`,
@@ -3336,13 +3337,14 @@ async function boot() {
   const init = await rgs.init();
   bar.style.width = '80%';
   S.cfg = init.config; S.balance = init.balance;
+  if (IS_TEQUITY) { S.profile = S.cfg.profile || 'standard'; document.querySelector('.demo-badge')?.remove(); }   // the server's variant decides the maths
   if (S.cfg.modesByProfile?.[S.profile]) S.cfg.modes = S.cfg.modesByProfile[S.profile];
   // v0.49 item 44: lighting test on the premium symbols. v0.51: OFF by default - art pack v3 carries the approved
   // lighting and clean edges in the art itself (no added rim, glow, shadow or tint); ?light=1 shows the old test
   document.body.classList.toggle('premium-lit', /[?&]light=1\b/.test(location.search));   // prices for the maths profile being played
   if (S.cfg.rtpByProfile?.[S.profile]) S.cfg.rtp = S.cfg.rtpByProfile[S.profile];
   S.betIdx = Math.max(0, S.cfg.bets.indexOf(S.cfg.defaultBet));
-  { const kept = verSwitch.restore();   // v0.66: the same balance and stake after a version switch (demo session)
+  if (!IS_TEQUITY) { const kept = verSwitch.restore();   // v0.66: the same balance and stake after a version switch (demo session)
     if (kept) { if (S.cfg.bets.includes(kept.bet)) S.betIdx = S.cfg.bets.indexOf(kept.bet);
       if (Number.isFinite(kept.balance) && rgs.session) { rgs.session.balance = kept.balance; S.balance = kept.balance; } } }
   S.cfg.paytableBU = S.cfg.paytableByProfile?.[S.profile] || S.cfg.paytableBU;
@@ -3368,7 +3370,7 @@ async function boot() {
   $('.row-feat')?.append($('#buyBtn'), $('#extraBtn'));
   // v0.64: the candle meter only with ?super=meter (otherwise the Super is a random upgrade)
   { const n = S.cfg.candlesByProfile?.[S.profile]; if (n) { candles.build(n.base); await refreshMeter(); } }
-  verSwitch.build();   // v0.66 test-versions switch (demo only)
+  if (!IS_TEQUITY) verSwitch.build();   // v0.66 test-versions switch (demo only)
   // v0.64: show the active link options on the splash footer (e.g. "v0.64 · MYSTERY LITE · SUPER METER")
   { const lab = { pace: 'PACE' };   // v0.68: the options' own badge texts come from TEST_OPTS (below)
     const mg = (location.search.match(/[?&]marigold=([a-z]+)/) || [])[1];
@@ -3377,6 +3379,15 @@ async function boot() {
     if (f && mg) f.textContent += ' · MARIGOLD ' + mg.toUpperCase(); }
   fit(); document.fonts?.ready.then(() => fit());   // v0.35: the assembly / spin row / meter layout measures the final control positions
   bind(); updateHud(); setWin(0, false); requestAnimationFrame(placeJackpots); setTimeout(placeJackpots, 600);
+  rgs.bindGame({   // Tequity Connector -> game (its own mute, turbo, spin and freeze controls)
+    setSound: v => { if (S.sound === v) return; S.sound = v; audio.setEnabled(v); savePrefs(); syncLaunchSound(); updateHud(); },
+    setTurbo: v => { S.turbo = v; updateHud(); },
+    openPaytable: () => $('#infoBtn').click(),
+    stopAutoplay: () => { if (S.auto.running) { S.auto.stopRequested = true; stopAuto(); } },
+    spin: () => { if (!S.busy && !S.auto.running) playRound(modeName()); },
+    freeze: v => { S.frozen = v; document.body.classList.toggle('rgs-frozen', v); if (v && S.auto.running) { S.auto.stopRequested = true; stopAuto(); } },
+  });
+  rgs.gameLoaded();   // Tequity: operators' modules may start loading now
   await minShow;
   bar.style.width = '100%';
   const play = $('#playBtn'); play.disabled = false; play.textContent = 'Play'; layoutLaunch();
@@ -3400,7 +3411,7 @@ async function boot() {
   if (devStats.on) devStats.reset();   // v0.50: ?dev=1 session stats
   window.__game = { totalWinScene, S, reels, board, audio, playRound, PRES, winBarFX, candles, devStats, rgs, bigWin, fx, fxTop, BUY_LEVELS }; // handy for debugging / automated QA
 }
-boot().catch(e => { console.error(e); toast(`Could not reach the game server (${e.message})`); });
+boot().catch(e => { console.error(e); if (!e.shownByConnector) toast(`Could not reach the game server (${e.message})`); });
 
 
 // ---------- v0.66 (checklist item 5): the test-versions switch ----------
