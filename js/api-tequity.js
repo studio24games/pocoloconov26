@@ -104,6 +104,10 @@ export class TequityRGS {
   normaliseConfig(cfg) {
     const out = { ...cfg, bets: this.ladder, defaultBet: this.defaultBet };
     if (!this.ladder.includes(out.defaultBet)) out.defaultBet = this.ladder[0];
+    // Buy stops where the server's Buy lists stop (its price limit, already in the player's currency). main.js
+    // compares both Buy and Super Buy prices with this one limit.
+    const prices = ['buy', 'superbuy'].flatMap(a => (Array.isArray(this.bets[a]?.available) ? this.bets[a].available : []));
+    if (prices.length) out.buyMaxStake = toMinor(Math.max(...prices));
     // The candle meter (if the variant has one): main.js looks it up per profile; the variant has exactly one.
     if (cfg.candles) { const c = cfg.candles; out.candlesByProfile = new Proxy({}, { get: () => c }); }
     return out;

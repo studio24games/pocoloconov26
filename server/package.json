@@ -1,0 +1,13 @@
+{
+  "name": "poco-loco-game-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Poco Loco game server for the Tequity (Xanadu) RGS. No dependencies.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/index.mjs",
+    "dev": "PROVIDER=studio24 ENVIRONMENT=development ALLOW_LOCAL_RNG=1 ALLOW_CHEATS=1 node src/index.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}

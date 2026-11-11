@@ -30,61 +30,51 @@ Connector *cheats*, when Tequity's own `cheats()` call answers, which it does on
 4. Connector callbacks into the game: `mute`, `unmute`, `turboToggle`, `paytableToggle`, `play`, `stopAutoplay`,
    `freeze`, `unfreeze`. The History button opens Tequity's game history.
 
-## What the game server must return
+## The game server (`server/`)
 
-The client relies on these shapes. They come straight from `math/wallet.js`, so the server can reuse that code with
-Tequity's RNG in place of `crypto.getRandomValues`.
+Built: see `server/README.md` to run, configure and deploy it. It implements every endpoint in
+GAME_SERVER_INTEGRATION.pdf and draws rounds with the same code as the demo (`drawRound` in `math/wallet.js`), so for
+the same random numbers it gives the same round and the same win (tested).
 
-### `GET /api/games/{game}/bets`
+### Money
 
-One entry per action. `available` lists line up **by index** with the main list: entry *i* of `buy` is the Buy price
-of main stake *i*. Cash, in the player's currency, 2 decimals.
+Tequity sends the bet in the **player's currency**. The server does not look stakes up in a euro list: it divides
+the bet by the action's price ratio to get the base stake and pays exact integer cents:
+`win = floor(totalWinBU × stakeCents / costPct)`, the same as `floor(totalWinBU × baseBetCents / 100)`.
 
-| action | available[i] |
-|---|---|
-| `main` | `BET_LADDER[i] / 100` (0.25 … 100.00) |
-| `double` | main × 160% |
-| `buy` | main × 80 (only stakes up to `BUY_MAX_STAKE`) |
-| `superbuy` | main × 160 (same limit) |
+### `GET /api/games/{game}/bets` (euros; Tequity converts)
 
-`default` = `DEFAULT_BET / 100` scaled the same way, `coin` = 25. Take the percentages from `MODES[mode].costPct` of the
-variant's profile, not from this table.
+| action | available[i] | coin | maxWin (× this action's bet) |
+|---|---|---|---|
+| `main` | `BET_LADDER[i] / 100` (0.25 … 100.00) | 100 | 5000 |
+| `double` | main × 1.6 | 160 | 3125 |
+| `buy` | main × 80, up to the 600.00 Buy limit | 8000 | 62.5 |
+| `superbuy` | main × 160, up to the same limit | 16000 | 31.25 |
 
-### `GET /api/games/{game}/config?variant={variant}`
+Lists line up by index with `main` (Buy lists are shorter: they stop at the limit). Coins are proportional to the
+price, as the spec asks. **To confirm with Xanadu:** that `maxWin` is a multiple of the action's bet.
 
-`publicConfig()` from `math/wallet.js` for the variant's maths profile, as plain JSON: send the variant's own
-`paytableBU`, `modes`, `rtp` and `loco` instead of the `*ByProfile` tables (those are lazy lookups and serialise to
-`{}`). Add:
+### `GET /api/games/{game}/config?variant=`
 
-- `profile`: the maths profile the variant plays, e.g. `"standard"`.
-- `candles`: `{ base, double }` candle counts, only if the variant has the candle meter.
+`publicConfig()` for the variant, as plain JSON, plus `profile` and, for meter variants, `candles`.
 
 ### `POST /api/games/{game}/play`
 
-Map `bet` back to the main stake through the index of `bets[action].available`, run the round, and return a Wager:
+Returns a single Wager (no `next`): `{ action, bet, win, data: <engine round>, state: { meters } }`. `state` carries
+the candle meters (key `profile:mode:baseBetCents`) between rounds; the server keeps no player data.
 
-```json
-{
-  "action": "main",
-  "bet": 1.25,
-  "win": 3.80,
-  "data": { "...": "the engine's round object (playRound output), exactly what record.round holds today" },
-  "state": { "meters": { "standard:base:125": { "lit": 2, "n": 5 } } }
-}
-```
+### RNG
 
-- `win` is cash: `floor(totalWin BU × betMinor / 100) / 100`.
-- `state.meters` uses the wallet's key format `profile:mode:betMinor`. Only needed for the candle meter.
-- No `next`.
-
-### `GET /api/games/{game}/cheats`
-
-`{ "main": [...], "double": [...], "buy": [...], "superbuy": [...] }` using the names the Demo tools panel already
-sends (`feature`, `big`, `rescue`, the `DEV_SCENARIOS` and `SUPER_SCENARIOS` keys). Dev environments only.
+Rounds use Tequity's RNG service (`RNG_SERVICE_HOST`/`RNG_SERVICE_PORT`), fetched in batches and consumed first to
+last. Floats map back to their exact 32-bit integers and then to a range by rejection sampling (unbiased). If a
+round runs the buffer dry it is replayed with the same numbers plus new ones, so no number is wasted and no round is
+re-drawn (`server/src/rng.mjs`). Cheats (development only) use a local RNG for their re-draw loops.
 
 ## Testing
 
 - `cd tests && npm test`: adapter unit tests against a fake Connector.
 - `cd tests && npm run e2e`: the real game in a headless browser, in demo mode and in Tequity mode. In Tequity mode
   `tests/mock-connector.js` stands in for the Connector and plays the server's part with the real maths. Needs Playwright.
-- `tests/mock-connector.js` is test-only and is not part of the uploaded bundle.
+- `cd server && npm test`: game server tests (21), including equivalence with the demo wallet and RNG replay.
+- `tests/mock-connector.js` is test-only and is not part of the uploaded bundle. With `window.__rgsServer` set it
+  forwards rounds to the real server; the e2e run does this against `server/` and a stand-in RNG service.

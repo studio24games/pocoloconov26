@@ -1,0 +1,5 @@
+# The game server image only needs the maths and the server code.
+*
+!math/
+!server/
+server/test/

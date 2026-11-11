@@ -107,5 +107,33 @@ await run('Tequity dev mode: forced outcome goes to the server as a cheat', asyn
   assert.ok(r.win >= 20000, 'the server honoured the cheat'); assert.equal(r.after, r.wallet);
 });
 
+// 4. The whole chain: game client -> (mock Connector as the platform + wallet) -> REAL game server (server/) ->
+//    stand-in Tequity RNG service. Every outcome comes from the server.
+const RNG_PORT = 8793, SRV_PORT = 8794;
+const rngProc = spawn(process.execPath, ['server/test/fake-rng-service.mjs', String(RNG_PORT)], { cwd: root, stdio: 'ignore' });
+const srvProc = spawn(process.execPath, ['server/src/index.mjs'], { cwd: root, stdio: 'ignore',
+  env: { ...process.env, PORT: String(SRV_PORT), PROVIDER: 'studio24', GAME: 'pocoloco', RNG_SERVICE_HOST: '127.0.0.1', RNG_SERVICE_PORT: String(RNG_PORT), ENVIRONMENT: 'staging' } });
+for (let i = 0; i < 50; i++) { try { if ((await fetch(`http://127.0.0.1:${SRV_PORT}/health`)).ok) break; } catch { /* starting */ } await sleep(200); }
+await run('Tequity mode against the real game server and RNG service', async page => {
+  const calls = [];
+  await page.addInitScript(() => { window.__rgsServer = '/rgs'; });
+  await page.route('**/rgs/**', async r => { const u = new URL(r.request().url()); calls.push(`${r.request().method()} ${u.pathname.replace('/rgs', '')}`);
+    const resp = await r.fetch({ url: `http://127.0.0.1:${SRV_PORT}${u.pathname.replace('/rgs', '')}${u.search}` }); await r.fulfill({ response: resp }); });
+  await page.goto(`${URL0}?rgs=tequity`);
+  await enter(page);
+  assert.ok(calls.includes('GET /api/games/pocoloco/bets') && calls.includes('GET /api/games/pocoloco/config'), 'bets and config from the server');
+  assert.equal(await page.evaluate(() => window.__game.S.cfg.profile), 'standard');
+  assert.equal(await page.evaluate(() => window.__game.S.cfg.buyMaxStake), 60000, 'Buy limit from the server Buy list');
+  for (let i = 0; i < 3; i++) {
+    const base = await spinOnce(page);
+    assert.ok(base.rec, 'round played'); assert.equal(base.bal, base.rec.after);
+    assert.equal(base.rec.after, base.rec.before - 125 + base.rec.win);
+  }
+  const buy = await rgsPlay(page, 125, 'buy');
+  assert.equal(buy.stake, 10000); assert.equal(buy.after, buy.wallet);
+  assert.equal(calls.filter(c => c === 'POST /api/games/pocoloco/play').length, 4, 'every round decided by the server');
+});
+srvProc.kill('SIGTERM'); rngProc.kill();
+
 await browser.close(); server.kill();
 process.exit(failed ? 1 : 0);
