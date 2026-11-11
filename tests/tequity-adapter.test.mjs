@@ -62,6 +62,7 @@ test('init: authenticate, info, recover; currency, balance and stake ladder in m
   assert.equal(init.config.defaultBet, 125);
   assert.equal(init.config.dev, false);
   assert.equal(init.config.candlesByProfile.anything.base, 5);
+  assert.equal(init.config.buyMaxStake, 25000, 'Buy limit = highest price in the server Buy lists');
 });
 
 test('base spin: action "main" with the cash bet, then complete; round record as the game expects', async () => {

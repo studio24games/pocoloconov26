@@ -124,19 +124,12 @@ const SUPER_SCENARIOS = {
   superBig: ([x = '500']) => r => r.feature?.super && r.totalWin >= +x * 100,
 };
 
-/** Validate, draw a round, settle the wallet. `force` is a DEV-only re-draw helper. */
-export function settleRound(session, rng, { bet, mode = 'base', force = null, dev = false, profile = 'standard' }) {
-  if (mode === 'extra') mode = 'double'; // 0.2.0 clients
-  if (!BET_LADDER.includes(bet)) throw new GameError(400, 'INVALID_BET');
-  if (!MODES[mode]) throw new GameError(400, 'INVALID_MODE');
-  if (!isProfile(profile)) throw new GameError(400, 'INVALID_PROFILE');
-  const stake = Math.round((bet * params(profile).MODES[mode].costPct) / 100);
+/** Draw one round for a mode and option set. `meter` is the player's candle meter for this mode and stake (or null).
+ *  `force` is a DEV-only re-draw helper: never honoured without dev=true. Shared by settleRound (demo wallet) and the
+ *  Tequity game server (server/), so both draw rounds the same way. */
+export function drawRound(rng, { bet, mode, force = null, dev = false, profile = 'standard', meter = null }) {
   const bought = mode === 'buy' || mode === 'superbuy';
-  if (bought && stake > BUY_MAX_STAKE) throw new GameError(400, 'BUY_DISABLED_AT_THIS_BET');
-  if (session.balance < stake) throw new GameError(402, 'INSUFFICIENT_FUNDS');
-
   const fname = typeof force === 'string' ? force.split(':')[0] : null;
-  const meter = bought ? null : getMeter(session, mode, bet, profile);
   // DEV only (meter option): Super scenarios draw with the meter full, 'candle' with it one short. The player's real
   // meter is left as it was. Never reachable without dev=true.
   const drawMeter = dev && meter && SUPER_SCENARIOS[fname] ? { lit: meter.n, n: meter.n }
@@ -160,10 +153,28 @@ export function settleRound(session, rng, { bet, mode = 'base', force = null, de
   } else if (dev && force === 'big') {
     for (let i = 0; i < 200000 && round.totalWin < 20000; i++) round = draw();
   }
-  if (round.meter) {
-    if (drawMeter !== meter) round.meter = { ...round.meter, forced: true };   // shown as played, but not kept
-    else session.meters[meterKey(mode, bet, profile)] = round.meter.after;
-  }
+  if (round.meter && drawMeter !== meter) round.meter = { ...round.meter, forced: true };   // shown as played, but not kept
+  return round;
+}
+
+/** Names of the DEV-only forced outcomes (Tequity: the cheats list in development environments). */
+export const CHEAT_NAMES = () => ['feature', 'rescue', 'rescueFail', 'featRescue', 'featFail', 'big', ...Object.keys(DEV_SCENARIOS), ...Object.keys(SUPER_SCENARIOS)];
+export { meterKey };
+
+/** Validate, draw a round, settle the wallet. `force` is a DEV-only re-draw helper. */
+export function settleRound(session, rng, { bet, mode = 'base', force = null, dev = false, profile = 'standard' }) {
+  if (mode === 'extra') mode = 'double'; // 0.2.0 clients
+  if (!BET_LADDER.includes(bet)) throw new GameError(400, 'INVALID_BET');
+  if (!MODES[mode]) throw new GameError(400, 'INVALID_MODE');
+  if (!isProfile(profile)) throw new GameError(400, 'INVALID_PROFILE');
+  const stake = Math.round((bet * params(profile).MODES[mode].costPct) / 100);
+  const bought = mode === 'buy' || mode === 'superbuy';
+  if (bought && stake > BUY_MAX_STAKE) throw new GameError(400, 'BUY_DISABLED_AT_THIS_BET');
+  if (session.balance < stake) throw new GameError(402, 'INSUFFICIENT_FUNDS');
+
+  const meter = bought ? null : getMeter(session, mode, bet, profile);
+  const round = drawRound(rng, { bet, mode, force, dev, profile, meter });
+  if (round.meter && !round.meter.forced) session.meters[meterKey(mode, bet, profile)] = round.meter.after;
 
   const balanceBefore = session.balance;
   session.balance -= stake;
