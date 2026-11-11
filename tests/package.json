@@ -1,0 +1,10 @@
+{
+  "name": "poco-loco-tests",
+  "private": true,
+  "type": "module",
+  "description": "Tests for the Poco Loco client. No build step: the game itself has no package.json.",
+  "scripts": {
+    "test": "node --test tequity-adapter.test.mjs",
+    "e2e": "node e2e-tequity.mjs"
+  }
+}

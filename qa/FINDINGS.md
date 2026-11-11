@@ -1,0 +1,9 @@
+# Findings
+
+ID | Area | Severity (Blocker/High/Medium/Low) | Description | Steps to reproduce | Status (Fixed/Open/Won't fix) | Commit
+---|---|---|---|---|---|---
+TQ-01 | Tequity / game server | Blocker | There is no Tequity game server yet (`server/`: REST endpoints, Tequity RNG, Dockerfile). Until it exists the client's Tequity mode can only run against `tests/mock-connector.js`. Contract: `docs/TEQUITY_INTEGRATION.md`. | Launch with `?rgs=tequity` on a real Tequity environment: no server to answer. | Open | 
+TQ-02 | Tequity / production build | High | The uploaded bundle still contains `math/` and `js/api-local.js` (imported by `js/api.js`) plus the Demo tools code. In Tequity mode none of it decides outcomes or balance (the server and wallet do), but a production upload should leave out `math/` and the demo tools. Gating today: version switch, secret door, demo badge and balance carry-over are off when `IS_TEQUITY`; forced outcomes reach the server only as Connector cheats in Tequity development mode. | Upload with the client workflow and list the CDN folder. | Open | 
+TQ-03 | Tequity / promotions | Medium | Connector promo and compliance hooks not wired: `freezeBet`/`unfreezeBet` (promo free spins), `initPromoUI`, `initRealityCheck`. Needed before operators run campaigns or in jurisdictions with reality checks. | Start a free-bets campaign: the stake is not locked. | Open | 
+TQ-04 | Tequity / currency | Low | The adapter converts cash to minor units as ×100, which assumes 2-decimal currencies. Zero-decimal currencies (JPY, KRW) or crypto would need a different scale. | Authenticate a JPY player. | Open | 
+TQ-05 | Tequity / presentation options | Low | Link options that only change presentation (e.g. `?reveal=swirl`, spin pace) still apply in Tequity mode. Maths options no longer do: the profile comes from the server's config. Strip with TQ-02. | Launch with `?rgs=tequity&reveal=swirl`. | Open | 
