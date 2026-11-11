@@ -66,8 +66,8 @@ jobs:
         run: |
           mkdir -p "dist/$GAME_ID"
           cp -r index.html style.css js math assets "dist/$GAME_ID/"
-          if ! grep -q '/slotify/connector/connector.js' "dist/$GAME_ID/index.html"; then
-            echo "::warning::index.html does not load /slotify/connector/connector.js yet. The game will upload but will not talk to the Tequity RGS."
+          if ! grep -rqF '/slotify/connector/connector.js' "dist/$GAME_ID/index.html" "dist/$GAME_ID/js"; then
+            echo "::warning::The game does not load /slotify/connector/connector.js. It will upload but will not talk to the Tequity RGS."
           fi
           echo "Files: $(find "dist/$GAME_ID" -type f | wc -l), size: $(du -sh "dist/$GAME_ID" | cut -f1)"
 
